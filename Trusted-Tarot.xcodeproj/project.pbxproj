@@ -11,6 +11,12 @@
 		16CFD4EA2BEAC06C00266AC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD4E92BEAC06C00266AC1 /* ContentView.swift */; };
 		16CFD4EC2BEAC06E00266AC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16CFD4EB2BEAC06E00266AC1 /* Assets.xcassets */; };
 		16CFD4EF2BEAC06E00266AC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16CFD4EE2BEAC06E00266AC1 /* Preview Assets.xcassets */; };
+		16CFD4FE2BEACBDC00266AC1 /* Respira-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16CFD4FD2BEACBDC00266AC1 /* Respira-Black.ttf */; };
+		16CFD5032BEACDD200266AC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD5022BEACDD200266AC1 /* HomeView.swift */; };
+		16CFD5052BEACDE100266AC1 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD5042BEACDE100266AC1 /* DailyView.swift */; };
+		16CFD5072BEACDF100266AC1 /* ReadingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD5062BEACDF100266AC1 /* ReadingsView.swift */; };
+		16CFD5092BEACDFD00266AC1 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD5082BEACDFD00266AC1 /* LearnView.swift */; };
+		16CFD50B2BEACE0B00266AC1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD50A2BEACE0B00266AC1 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,13 @@
 		16CFD4E92BEAC06C00266AC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		16CFD4EB2BEAC06E00266AC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		16CFD4EE2BEAC06E00266AC1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		16CFD4FD2BEACBDC00266AC1 /* Respira-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Respira-Black.ttf"; sourceTree = "<group>"; };
+		16CFD5012BEACD1500266AC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		16CFD5022BEACDD200266AC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		16CFD5042BEACDE100266AC1 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		16CFD5062BEACDF100266AC1 /* ReadingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingsView.swift; sourceTree = "<group>"; };
+		16CFD5082BEACDFD00266AC1 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		16CFD50A2BEACE0B00266AC1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +64,11 @@
 		16CFD4E62BEAC06B00266AC1 /* Trusted-Tarot */ = {
 			isa = PBXGroup;
 			children = (
+				16CFD5012BEACD1500266AC1 /* Info.plist */,
 				16CFD4E72BEAC06B00266AC1 /* Trusted_TarotApp.swift */,
 				16CFD4E92BEAC06C00266AC1 /* ContentView.swift */,
+				16CFD4FB2BEAC6D500266AC1 /* Resources */,
+				16CFD4F52BEAC64500266AC1 /* Views */,
 				16CFD4EB2BEAC06E00266AC1 /* Assets.xcassets */,
 				16CFD4ED2BEAC06E00266AC1 /* Preview Content */,
 			);
@@ -65,6 +81,74 @@
 				16CFD4EE2BEAC06E00266AC1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		16CFD4F52BEAC64500266AC1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD4FA2BEAC6A100266AC1 /* Settings */,
+				16CFD4F92BEAC69800266AC1 /* Learn */,
+				16CFD4F82BEAC68900266AC1 /* Readings */,
+				16CFD4F72BEAC66F00266AC1 /* Daily */,
+				16CFD4F62BEAC66500266AC1 /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		16CFD4F62BEAC66500266AC1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD5022BEACDD200266AC1 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		16CFD4F72BEAC66F00266AC1 /* Daily */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD5042BEACDE100266AC1 /* DailyView.swift */,
+			);
+			path = Daily;
+			sourceTree = "<group>";
+		};
+		16CFD4F82BEAC68900266AC1 /* Readings */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD5062BEACDF100266AC1 /* ReadingsView.swift */,
+			);
+			path = Readings;
+			sourceTree = "<group>";
+		};
+		16CFD4F92BEAC69800266AC1 /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD5082BEACDFD00266AC1 /* LearnView.swift */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
+		16CFD4FA2BEAC6A100266AC1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD50A2BEACE0B00266AC1 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		16CFD4FB2BEAC6D500266AC1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD4FC2BEAC6EC00266AC1 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		16CFD4FC2BEAC6EC00266AC1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				16CFD4FD2BEACBDC00266AC1 /* Respira-Black.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +211,7 @@
 			files = (
 				16CFD4EF2BEAC06E00266AC1 /* Preview Assets.xcassets in Resources */,
 				16CFD4EC2BEAC06E00266AC1 /* Assets.xcassets in Resources */,
+				16CFD4FE2BEACBDC00266AC1 /* Respira-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16CFD50B2BEACE0B00266AC1 /* SettingsView.swift in Sources */,
+				16CFD5052BEACDE100266AC1 /* DailyView.swift in Sources */,
+				16CFD5092BEACDFD00266AC1 /* LearnView.swift in Sources */,
+				16CFD5032BEACDD200266AC1 /* HomeView.swift in Sources */,
 				16CFD4EA2BEAC06C00266AC1 /* ContentView.swift in Sources */,
 				16CFD4E82BEAC06B00266AC1 /* Trusted_TarotApp.swift in Sources */,
+				16CFD5072BEACDF100266AC1 /* ReadingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +364,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Trusted-Tarot/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Trusted-Tarot/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -302,6 +393,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Trusted-Tarot/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Trusted-Tarot/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

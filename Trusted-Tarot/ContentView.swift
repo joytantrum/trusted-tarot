@@ -13,7 +13,7 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Test")
+            Text("Tempest Tarot").font(.custom("Respira-Black", size: 30))
         }
         .padding()
     }
