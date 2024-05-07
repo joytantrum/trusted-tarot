@@ -23,7 +23,8 @@ struct HomeView: View {
                                    Image("logo")
                                        .resizable()
                                        .aspectRatio(contentMode: .fit)
-                                       .padding(-20)
+                                       .padding(0)
+                                       .padding(.top, 100)
                                        
                                    Text("Tempest Tarot").font(.custom("Respira-Black", size: 30))
                                        .fontWeight(.semibold)
