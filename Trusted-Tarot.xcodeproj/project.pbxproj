@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16A4FB012BEFC32B00AFFFA8 /* Card-Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A4FB002BEFC32B00AFFFA8 /* Card-Info.swift */; };
 		16CFD4E82BEAC06B00266AC1 /* Trusted_TarotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD4E72BEAC06B00266AC1 /* Trusted_TarotApp.swift */; };
 		16CFD4EA2BEAC06C00266AC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFD4E92BEAC06C00266AC1 /* ContentView.swift */; };
 		16CFD4EC2BEAC06E00266AC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16CFD4EB2BEAC06E00266AC1 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16A4FB002BEFC32B00AFFFA8 /* Card-Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card-Info.swift"; sourceTree = "<group>"; };
 		16CFD4E42BEAC06B00266AC1 /* Trusted-Tarot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trusted-Tarot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CFD4E72BEAC06B00266AC1 /* Trusted_TarotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trusted_TarotApp.swift; sourceTree = "<group>"; };
 		16CFD4E92BEAC06C00266AC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				16CFD5082BEACDFD00266AC1 /* LearnView.swift */,
+				16A4FB002BEFC32B00AFFFA8 /* Card-Info.swift */,
 			);
 			path = Learn;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				16CFD5092BEACDFD00266AC1 /* LearnView.swift in Sources */,
 				16CFD5032BEACDD200266AC1 /* HomeView.swift in Sources */,
 				16CFD4EA2BEAC06C00266AC1 /* ContentView.swift in Sources */,
+				16A4FB012BEFC32B00AFFFA8 /* Card-Info.swift in Sources */,
 				16CFD4E82BEAC06B00266AC1 /* Trusted_TarotApp.swift in Sources */,
 				16CFD5072BEACDF100266AC1 /* ReadingsView.swift in Sources */,
 			);

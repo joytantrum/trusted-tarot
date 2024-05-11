@@ -7,18 +7,46 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainTabView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Tempest Tarot").font(.custom("Respira-Black", size: 30))
+        TabView {
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
+            
+            DailyView()
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Daily")
+                }
+            
+            ReadingsView()
+                .tabItem {
+                    Image(systemName: "eye")
+                    Text("Readings")
+                }
+            
+            LearnView()
+                .tabItem {
+                    Image(systemName: "book")
+                    Text("Learn")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
+            
         }
-        .padding()
+        .accentColor(.white)
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
