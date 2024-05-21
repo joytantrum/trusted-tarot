@@ -15,7 +15,7 @@ additionally, the app includes educational resources to help you learn about the
 
 ## Installation
 
-this project requires [node](https://nodejs.org/en) and [Xcode](https://www.npmjs.com](https://developer.apple.com/xcode/) installed globally.
+this project requires [node](https://nodejs.org/en) and Xcode installed globally.
 clone the repository to a directory of your choosing--
 
 ```bash
