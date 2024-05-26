@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct DailyView: View {
+    
     @State private var cardImage: String = "1 The Magician"
     @State private var isRandomizing: Bool = false
     @State private var isCardRevealed: Bool = false
-    @State private var isWiggling: Bool = false
+    @State private var shufflePressed: Bool = false
+    @State private var rotationAngle: Double = 0.0
     
     let cards: [String] = [
         "1 The Magician", "2 The High Priestess", "3 The Empress", "4 The Emperor",
@@ -32,8 +34,15 @@ struct DailyView: View {
         "72 Nine of Pentacles", "73 Ten of Pentacles", "74 Page of Pentacles", "75 Knight of Pentacles",
         "76 Queen of Pentacles", "77 King of Pentacles", "O The Fool"
     ]
-
     
+    // Date object
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        return formatter
+    }
+
+    // Function to shuffle the array of cards
     func shuffleArray<T>(_ array: [T]) -> [T] {
         var newArray = array
         for i in stride(from: newArray.count - 1, through: 1, by: -1) {
@@ -43,33 +52,61 @@ struct DailyView: View {
         return newArray
     }
     
-// Function to randomize the cards
+    // Function to randomize the cards after each shuffle
     func randomizeCard() {
         if !isRandomizing {
             isRandomizing = true
-            //isWiggling = true
-            
+            shufflePressed = true
             var shuffledCards = shuffleArray(cards)
-            
+            // Amount of time the cards are shuffled for
             let timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
                 shuffledCards = shuffleArray(shuffledCards)
                 cardImage = shuffledCards[0]
             }
-            
+            let wiggleTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                withAnimation {
+                    rotationAngle = (rotationAngle == 10.0) ? -10.0 : 10.0
+                }
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 timer.invalidate()
+                wiggleTimer.invalidate()
                 isRandomizing = false
-                //isCardRevealed = true
+                rotationAngle = 0.0
             }
         }
     }
     
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
-        return formatter
+    // Computed property for the shuffle button
+    private var shuffleButton: some View {
+        Button(action: {
+            randomizeCard()
+        }) {
+            Text(isRandomizing ? "Shuffling..." : "Shuffle")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding(10)
+                .background(Color.blue)
+                .cornerRadius(10)
+        }
+        .disabled(isRandomizing)
     }
     
+    // Computed property for the draw card button
+    private var drawCardButton: some View {
+        Button(action: drawCardButtonTapped) {
+            Text("Draw Card")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding(10)
+                .background(Color.blue)
+                .cornerRadius(10)
+                .padding(.top, 500)
+        }
+    }
+    
+    
+    // Main View (Daily View)
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -103,54 +140,41 @@ struct DailyView: View {
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
                                 .padding(.bottom, 0)
-                            
                             Spacer()
   
- // Shuffle BUTTON
-                            Button(action: {
-                                randomizeCard()
-                                //isWiggling = true
-                            }) {
-                                Text("Shuffle")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .padding(10)
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
-                            }
-                            .padding(.bottom, 220)
-                            
+                            // Shuffle button var
+                            shuffleButton
+                                .padding(.bottom, 220)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     )
                     
-// If - else card is revealed
+                    // If card is revealed
                     if isCardRevealed {
                         Image(cardImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width, height: geometry.size.height * 0.4) // Adjust the size of the card image to fit your design
-                            .padding(.bottom, 50) // Adjust the padding as needed
-                        
-                        
+                            .frame(width: geometry.size.width, height: geometry.size.height * 0.4) // adjust the size of the card image
+                            .padding(.bottom, 50)
+                            .rotationEffect(.degrees(rotationAngle))
+                    // If card is not revealed
                     } else {
                         Image("card_back")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: geometry.size.width, height: geometry.size.height * 0.4) // Adjust the size of the card image to fit your design
-                            .padding(.bottom, 50) // Adjust the padding as needed
+                            .frame(width: geometry.size.width, height: geometry.size.height * 0.4) // adjust the size of the card image
+                            .padding(.bottom, 50)
+                            .rotationEffect(.degrees(rotationAngle))
                     }
-                    
-// If - else card is currently shuffling
+                    // If card is currently shuffling
                     if isRandomizing {
-                        
                     }
+                    // If card is not currently shuffling
                     if !isRandomizing {
+                        // Draw Card BUTTON
                         Button(action: {
                             randomizeCard()
                             isCardRevealed = true
-                            //isWiggling = false
-// Draw Card BUTTON
                         }) {
                             Text("Draw Card")
                                 .font(.headline)
@@ -158,7 +182,7 @@ struct DailyView: View {
                                 .padding(10)
                                 .background(Color.blue)
                                 .cornerRadius(10)
-                                .padding(.top, 600)
+                                .padding(.top, 500)
                         }
                         
                     }
@@ -167,7 +191,14 @@ struct DailyView: View {
             .edgesIgnoringSafeArea(.all)
         }
     }
+    
+    // Function to handle 'Draw Card' button tap
+    private func drawCardButtonTapped() {
+        // No action needed for now
+    }
 }
+
+
 #Preview {
-    DailyView()
+    ContentView()
 }

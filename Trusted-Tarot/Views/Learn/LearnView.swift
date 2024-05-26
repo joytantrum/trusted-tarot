@@ -33,36 +33,41 @@ struct LearnView: View {
         SectionData(title: "stars", items: ["Ace of Pentacles", "Two of Pentacles", "Three of Pentacles", "Four of Pentacles", "Five of Pentacles", "Six of Pentacles", "Seven of Pentacles", "Eight of Pentacles", "Nine of Pentacles", "Ten of Pentacles", "Page of Pentacles", "Queen of Pentacles", "King of Pentacles"])
     ]
     
+    // Icons corresponding to each suit
     var body: some View {
         NavigationView {
-            ZStack {
+            ZStack(alignment: .center) {
                 Image("galaxy_2")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()
 
-                VStack(alignment: .leading) {
+                VStack {
                     ScrollView(.horizontal, showsIndicators: true) {
-                        HStack(spacing: 0) {
-                            ForEach(sections) { section in
-                                Button(action: {
-                                    selectedSection = section
-                                }) {
-                                    Image(section.title)
-                                        .renderingMode(.template)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40)
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 0)
-                                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.white.opacity(0.7))
+                            .frame(width: 380, height: 60)
+                            .padding(.horizontal, 0)
+                            
+                            HStack(spacing: 50) { // spacing  between icons
+                                ForEach(sections) { section in
+                                    Button(action: {
+                                        selectedSection = section
+                                    }) {
+                                        Image(section.title)
+                                            .renderingMode(.template)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(section.title == selectedSection?.title ? .blue : .white)
+                                            .shadow(color: Color.gray.opacity(0.5), radius: 3, x: 5, y: 0)
+                                    }
                                 }
                             }
-                            
+                            .padding(.horizontal, 30) // equal padding on both sides
                         }
                     }
-
                     Divider()
 
                     // Displays the selected section
@@ -96,8 +101,11 @@ struct SectionView: View {
             }
             //.scrollContentBackground(.hidden)
             .listRowBackground((Color.white).opacity(0.7))
+            .cornerRadius(20)
+            
         }
         .scrollContentBackground(.hidden)
+        .padding(.horizontal, 0)
         
     }
 }
@@ -197,39 +205,56 @@ struct CardDetailView: View {
     let cardInfo: CardInfo?
     
     var body: some View {
-        VStack {
-            // Add the image view here
-            Image(cardInfo?.imageName ?? "card_back")
+        ZStack {
+            // Galaxy background image
+            Image("galaxy_2")
                 .resizable()
-                .scaledToFit()
-                .frame(width: 200, height: 200)
-                .padding(.top, -220)
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
             
-            // Existing code
-            Text(cardInfo?.name ?? "Unknown")
-                .font(.custom("Respira-Black", size: 20))
+            VStack {
+                // Image view for the card
+                Image(cardInfo?.imageName ?? "card_back")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+                    .padding(.top, -220)
+                
+                // Card details
+                Text(cardInfo?.name ?? "Unknown")
+                    .font(.custom("Respira-Black", size: 20))
+                    .foregroundColor(.white)
 
-            Text(cardInfo?.description ?? "No description available.")
-                .multilineTextAlignment(.leading)
-                .font(.system(size: 15))
-            Text("Key Meanings")
-                .multilineTextAlignment(.leading)
-                .font(.custom("Respira-Black", size: 20))
+                Text(cardInfo?.description ?? "No description available.")
+                    .multilineTextAlignment(.leading)
+                    .font(.system(size: 15))
+                    .foregroundColor(.white)
+                    .padding([.leading, .trailing], 70)
+                    .padding(.top, 5)
+                
+                Text("Key Meanings")
+                    .multilineTextAlignment(.leading)
+                    .font(.custom("Respira-Black", size: 20))
+                    .foregroundColor(.white)
+                    .padding(.top, 5)
+                
+            }
+            
         }
         .navigationBarTitle("", displayMode: .inline)
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading:
-                    Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.black)
-                    }
-                )
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.white)
             }
-        }
+        )
+    }
+}
 
 #Preview {
-    LearnView()
+    ContentView()
 }
 
