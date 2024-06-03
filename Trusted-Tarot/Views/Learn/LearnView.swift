@@ -18,19 +18,19 @@ struct CardInfo: Identifiable {
     let name: String
     let description: String
     let imageName: String
-    //let keyMeanings: String
-    // add more properties as needed
+    let keyMeanings: String
+
 }
 
 struct LearnView: View {
     @State private var selectedSection: SectionData?
 
     let sections = [
-        SectionData(title: "bolt", items: ["The Fool", "The Magician", "The High Priestess", "The Emperor", "The Empress", "The Hierophant", "The Lovers", "The Chariot", "Strength", "The Hermit", "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance", "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgement", "The World"]),
+        SectionData(title: "crown", items: ["The Fool", "The Magician", "The High Priestess", "The Emperor", "The Empress", "The Hierophant", "The Lovers", "The Chariot", "Strength", "The Hermit", "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance", "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgement", "The World"]),
         SectionData(title: "wand", items: ["Ace of Wands", "Two of Wands", "Three of Wands", "Four of Wands", "Five of Wands", "Six of Wands", "Seven of Wands", "Eight of Wands", "Nine of Wands", "Ten of Wands", "Page of Wands", "Knight of Wands", "Queen of Wands", "King of Wands"]),
-        SectionData(title: "drink", items: ["Ace of Cups", "Two of Cups", "Three of Cups", "Four of Cups", "Five of Cups", "Six of Cups", "Seven of Cups", "Eight of Cups", "Nine of Cups", "Ten of Cups", "Page of Cups", "Knight of Cups", "Queen of Cups", "King of Cups"]),
-        SectionData(title: "pencil", items: ["Ace of Swords", "Two of Swords", "Three of Swords", "Four of Swords", "Five of Swords", "Six of Wands", "Seven of Wands", "Eight of Wands", "Nine of Wands", "Ten of Wands", "Page of Swords", "Queen of Swords", "King of Swords"]),
-        SectionData(title: "stars", items: ["Ace of Pentacles", "Two of Pentacles", "Three of Pentacles", "Four of Pentacles", "Five of Pentacles", "Six of Pentacles", "Seven of Pentacles", "Eight of Pentacles", "Nine of Pentacles", "Ten of Pentacles", "Page of Pentacles", "Queen of Pentacles", "King of Pentacles"])
+        SectionData(title: "cup", items: ["Ace of Cups", "Two of Cups", "Three of Cups", "Four of Cups", "Five of Cups", "Six of Cups", "Seven of Cups", "Eight of Cups", "Nine of Cups", "Ten of Cups", "Page of Cups", "Knight of Cups", "Queen of Cups", "King of Cups"]),
+        SectionData(title: "sword", items: ["Ace of Swords", "Two of Swords", "Three of Swords", "Four of Swords", "Five of Swords", "Six of Wands", "Seven of Wands", "Eight of Wands", "Nine of Wands", "Ten of Wands", "Page of Swords", "Queen of Swords", "King of Swords"]),
+        SectionData(title: "star", items: ["Ace of Pentacles", "Two of Pentacles", "Three of Pentacles", "Four of Pentacles", "Five of Pentacles", "Six of Pentacles", "Seven of Pentacles", "Eight of Pentacles", "Nine of Pentacles", "Ten of Pentacles", "Page of Pentacles", "Queen of Pentacles", "King of Pentacles"])
     ]
     
     // Icons corresponding to each suit
@@ -43,45 +43,47 @@ struct LearnView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    ScrollView(.horizontal, showsIndicators: true) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20)
+                    // First RoundedRectangle for icons
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
                             .fill(Color.white.opacity(0.7))
                             .frame(width: 380, height: 60)
                             .padding(.horizontal, 0)
-                            
-                            HStack(spacing: 50) { // spacing  between icons
-                                ForEach(sections) { section in
-                                    Button(action: {
-                                        selectedSection = section
-                                    }) {
-                                        Image(section.title)
-                                            .renderingMode(.template)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 30, height: 30)
-                                            .foregroundColor(section.title == selectedSection?.title ? .blue : .white)
-                                            .shadow(color: Color.gray.opacity(0.5), radius: 3, x: 5, y: 0)
-                                    }
+                        
+                        HStack(spacing: 55) { // spacing between icons
+                            ForEach(sections) { section in
+                                Button(action: {
+                                    selectedSection = section
+                                }) {
+                                    Image(section.title)
+                                        .renderingMode(.template)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(section.title == selectedSection?.title ? .blue : .white)
+                                        .shadow(color: Color.gray.opacity(0.5), radius: 3, x: 5, y: 0)
                                 }
                             }
-                            .padding(.horizontal, 30) // equal padding on both sides
                         }
+                        .padding(.horizontal, 30) // equal padding on both sides
                     }
+                    
                     Divider()
 
                     // Displays the selected section
                     if let selectedSection = selectedSection {
-                        SectionView(data: selectedSection.items, cardInfoDictionary: cardInfoDictionary)
+                        SpreadView(data: selectedSection.items, cardInfoDictionary: cardInfoDictionary)
                     } else {
-                        SectionView(data: sections.first?.items ?? [], cardInfoDictionary: cardInfoDictionary)
+                        SpreadView(data: sections.first?.items ?? [], cardInfoDictionary: cardInfoDictionary)
                     }
                 }
+                
             }
             .navigationTitle("Learn")
         }
     }
 }
+
 
 // Rows of the list (Card Image, Card name)
 struct SectionView: View {
@@ -102,11 +104,9 @@ struct SectionView: View {
             //.scrollContentBackground(.hidden)
             .listRowBackground((Color.white).opacity(0.7))
             .cornerRadius(20)
-            
         }
         .scrollContentBackground(.hidden)
         .padding(.horizontal, 0)
-        
     }
 }
     
@@ -232,14 +232,22 @@ struct CardDetailView: View {
                     .padding([.leading, .trailing], 70)
                     .padding(.top, 5)
                 
-                Text("Key Meanings")
-                    .multilineTextAlignment(.leading)
-                    .font(.custom("Respira-Black", size: 20))
-                    .foregroundColor(.white)
-                    .padding(.top, 5)
-                
+                // Display Key Meanings if available
+                if let keyMeanings = cardInfo?.keyMeanings, !keyMeanings.isEmpty {
+                    Text("Key Meanings")
+                        .multilineTextAlignment(.leading)
+                        .font(.custom("Respira-Black", size: 20))
+                        .foregroundColor(.white)
+                        .padding(.top, 5)
+                    
+                    Text(keyMeanings)
+                        .multilineTextAlignment(.leading)
+                        .font(.system(size: 15))
+                        .foregroundColor(.white)
+                        .padding([.leading, .trailing], 70)
+                        .padding(.top, 5)
+                }
             }
-            
         }
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)

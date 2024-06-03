@@ -50,7 +50,10 @@ struct SettingsView: View {
                 }
             }
         }
+        .navigationTitle("Settings")
         .scrollContentBackground(.hidden)
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

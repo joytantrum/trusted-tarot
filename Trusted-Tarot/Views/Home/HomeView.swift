@@ -49,7 +49,9 @@ struct HomeView: View {
                            )
                        }
                    }
-                   .edgesIgnoringSafeArea(.all)
+                    .navigationTitle("Home")
+                    .navigationBarHidden(true)
+                    .edgesIgnoringSafeArea(.all)
         }
     }
 }

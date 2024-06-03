@@ -7,17 +7,32 @@
 
 import SwiftUI
 
-
-
 struct MainTabView: View {
     @State private var selectedTab = 0
     
     init() {
-        // Customize tab bar appearance
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.black // Set background color to black
-        UITabBar.appearance().standardAppearance = appearance
+        // tab bar appearance
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = .black // Set tab bar background to white
+
+        // unselected item appearance
+        let itemAppearance = UITabBarItemAppearance()
+        itemAppearance.normal.iconColor = UIColor.white
+        itemAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        // selected item appearance
+        itemAppearance.selected.iconColor = UIColor.blue
+        itemAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.blue]
+        
+        // apply the item appearances to the tab bar appearance
+        tabBarAppearance.stackedLayoutAppearance = itemAppearance
+        tabBarAppearance.inlineLayoutAppearance = itemAppearance
+        tabBarAppearance.compactInlineLayoutAppearance = itemAppearance
+        
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+
     }
     
     var body: some View {
@@ -49,14 +64,13 @@ struct MainTabView: View {
                     Text("Settings")
                 }
                 .tag(3)
+            
         }
-        .accentColor(selectedTab == 2 ? .blue : .white) // changes accent color based on selected tab
     }
 }
 
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainTabView()
     }
 }

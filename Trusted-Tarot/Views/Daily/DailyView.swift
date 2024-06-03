@@ -188,6 +188,8 @@ struct DailyView: View {
                     }
                 }
             }
+            .navigationTitle("Daily")
+            .navigationBarHidden(true)
             .edgesIgnoringSafeArea(.all)
         }
     }

@@ -11,7 +11,7 @@ import SwiftUI
 struct Trusted_TarotApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
         }
     }
 }
