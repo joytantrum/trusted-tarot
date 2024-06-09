@@ -21,8 +21,9 @@ struct ReadingsInfo: Identifiable {
 }
 
 struct ReadingsView: View {
-    @State private var selectedSection: ReadingsData?
-
+    //  state variable to keep track of the selected reading
+    @State private var selectedReading: ReadingsData?
+        // array of ReadingsData objects that represent different reading sections
         let spreadSections = [
             ReadingsData(title: "head", items: ["Celtic Cross Spread", "Three Card Spread", "Horseshoe Spread"], description: ["Description for Celtic Cross Spread"]),
             ReadingsData(title: "circle-heart", items: ["Relationship Spread"], description: ["Description for Relationship Spread"]),
@@ -47,17 +48,17 @@ struct ReadingsView: View {
                             .frame(width: 380, height: 60)
                             .padding(.horizontal, 0)
                         
-                        HStack(spacing: 80) { // spacing between icons
-                            ForEach(spreadSections) { section in
+                        HStack(spacing: 80) {                          // spacing between icons
+                            ForEach(spreadSections) { section in       // iterates over spreadSections to create a button for each section
                                 Button(action: {
-                                    selectedSection = section
+                                    selectedReading = section          // when pressed, updates selectedReading
                                 }) {
-                                    Image(section.title)
+                                    Image(section.title)               // displays an image (assuming the image names match the titles).
                                         .renderingMode(.template)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 25, height: 25)
-                                        .foregroundColor(section.title == selectedSection?.title ? .blue : .white)
+                                        .foregroundColor(section.title == selectedReading?.title ? .blue : .white)
                                         .shadow(color: Color.gray.opacity(0.5), radius: 3, x: 5, y: 0)
                                 }
                             }
@@ -72,11 +73,11 @@ struct ReadingsView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(Color.white.opacity(0.7))
                                 .frame(width: 380, height: 80)
-                                .padding(.top, 10) // padding to create space between the two rectangles
+                                .padding(.top, 10)                  // padding to create space between the two rectangles
                                 .padding(.horizontal, 0)
                             
                             HStack {
-                                Image(systemName: "stopwatch") // Use an appropriate system image or custom image
+                                Image(systemName: "stopwatch")      // Use an appropriate system image or custom image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30)
@@ -101,11 +102,12 @@ struct ReadingsView: View {
                     }
                     
                     Divider()
+                    // Displays the selected section (conditionally unwraps selectedReading)
                     // Displays the selected section
-                    if let selectedSection = selectedSection {
-                        SpreadView(data: selectedSection.items, cardInfoDictionary: cardInfoDictionary)
+                    if let selectedSection = selectedReading {
+                        SpreadView(data: selectedSection.items, readingsInfoDictionary: readingsInfoDictionary)
                     } else {
-                        SpreadView(data: spreadSections.first?.items ?? [], cardInfoDictionary: cardInfoDictionary)
+                        SpreadView(data: spreadSections.first?.items ?? [], readingsInfoDictionary: readingsInfoDictionary)
                     }
                 }
             }
@@ -117,31 +119,51 @@ struct ReadingsView: View {
 // Rows of the list (Card Icon, Spread name, Spread description)
 struct SpreadView: View {
     let data: [String]
-    let cardInfoDictionary: [String: CardInfo]
-    
+    let readingsInfoDictionary: [String: ReadingsInfo]
+
     var body: some View {
-        List(data, id: \.self) { item in
-            NavigationLink(destination: CardDetailView(cardInfo: cardInfoDictionary[item])) {
-                HStack {
-                    Image(cardInfoDictionary[item]?.imageName ?? "card_back")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 80)
-                    Text(item)
+        List {
+            ForEach(data, id: \.self) { item in
+                if let readingInfo = readingsInfoDictionary[item] {
+                    NavigationLink(destination: ReadingDetailView(readingsInfo: readingInfo)) {
+                        HStack(alignment: .center, spacing: 10) {
+                            Image("cards") // Ensure you have correct image names in readingsInfo
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30) // Smaller frame dimensions
+                            
+
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(readingInfo.name)
+                                    //.font(.headline)
+                                    .foregroundColor(.primary)
+                                Text(readingInfo.description)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(2) // Limit description to 2 lines
+                            }
+                            .padding(.leading, 5)
+                        }
+                        .padding()
+                        //.background(RoundedRectangle(cornerRadius: 10).fill(Color.white.opacity(0.4))) // Background for the entire HStack
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5) // Shadow for the HStack
+                    }
+                    .padding(.vertical, 5)
+                    .listRowBackground(Color.white.opacity(0.7)) // Ensure each row's background is clear
                 }
             }
-            //.scrollContentBackground(.hidden)
-            .listRowBackground((Color.white).opacity(0.7))
-            .cornerRadius(20)
         }
         .scrollContentBackground(.hidden)
+        .background(Color.clear) // Make the List background transparent
         .padding(.horizontal, 0)
-        
     }
 }
 
+
+
 // Individual readings pages (Description, Intention, Layout)
 struct ReadingDetailView: View {
+    // provides access to the presentation mode environment value to dismiss the current view
     @Environment(\.presentationMode) var presentationMode
     let readingsInfo: ReadingsInfo?
     

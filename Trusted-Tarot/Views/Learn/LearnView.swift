@@ -19,7 +19,7 @@ struct CardInfo: Identifiable {
     let description: String
     let imageName: String
     let keyMeanings: String
-
+    // add more properties as needed
 }
 
 struct LearnView: View {
@@ -72,12 +72,11 @@ struct LearnView: View {
 
                     // Displays the selected section
                     if let selectedSection = selectedSection {
-                        SpreadView(data: selectedSection.items, cardInfoDictionary: cardInfoDictionary)
+                        SectionView(data: selectedSection.items, cardInfoDictionary: cardInfoDictionary)
                     } else {
-                        SpreadView(data: sections.first?.items ?? [], cardInfoDictionary: cardInfoDictionary)
+                        SectionView(data: sections.first?.items ?? [], cardInfoDictionary: cardInfoDictionary)
                     }
                 }
-                
             }
             .navigationTitle("Learn")
         }
