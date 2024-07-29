@@ -7,6 +7,10 @@ additionally, the app includes educational resources to help you learn about the
 
 <https://www.figma.com/design/KEC4Gg19yspjIR1gpsyPPV/Tarot-IOS-Appl?node-id=0%3A1&t=ho3qhLwImtdiDzCF-1>
 
+## Demo 07/29/24
+
+https://github.com/user-attachments/assets/a2236ea2-764a-492e-a8db-762b11332ff0
+
 ## Features
 
 - daily readings: receive a new tarot reading every day for daily guidance and insight.
